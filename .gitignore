@@ -31,8 +31,16 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 /tests/results/
 
 #folder lampiran
-assets/foto/lampiran
+/assets/foto/lampiran
 
 #env database
-application/config/database.php
+/application/config/database.php
+
+#other app
+/dashboard_pasar/
+/dashboard_pdl/
+/etax_2/
+/etax_old/
+/portal_payment/
+
 

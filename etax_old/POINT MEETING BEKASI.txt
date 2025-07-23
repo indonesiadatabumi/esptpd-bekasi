@@ -1,8 +1,0 @@
-- INTEGRASI SIMDA
-- HISTORY PEMBATALAN KETETAPAN
-- SIPDAH MELALUI PROSES PENETAPAN / APPROVAL
-- INPUT PENDAFTARAN WP MELALUI SIPDAH SESUAI DENGAN MENU REKAM WP DI siprida
-- cetak STS Pajak Reklame mohon ditambah naskah reklame nya
-- cetak excel atas wp tutup (done)
-- hapus data inputan catering yang tidak dibayar maks 30 hari mulai dari tanggal input
-
