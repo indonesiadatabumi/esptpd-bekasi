@@ -32,7 +32,13 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class='col-md-4 control-label'>Jenis_pajak </label>
+                                        <label class='col-md-4 control-label'>Nama Usaha</label>
+                                        <div class='col-md-8'>
+                                            <input type='text' class='form-control readonly-bg' name='nama_usaha' id='nama_usaha' value='<?= $data_wp->NAMA_USAHA ?>' readonly />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class='col-md-4 control-label'>Jenis Pajak </label>
                                         <div class='col-md-8'>
                                             <input type='text' class='form-control readonly-bg' name='jns_pajak' id='jns_pajak' value='<?= $data_wp->ref_kodus_nama ?>' readonly />
                                         </div>
@@ -40,7 +46,7 @@
                                     <div class="form-group">
                                         <label class='col-md-4 control-label'>Alamat </label>
                                         <div class='col-md-8'>
-                                            <input type='text' class='form-control readonly-bg' name='alamat_op' id='alamat_op' value='<?= $data_wp->JALAN." Blok ".$data_wp->BLOK." RT ".$data_wp->RT." RW ".$data_wp->RW ?>' readonly />
+                                            <input type='text' class='form-control readonly-bg' name='alamat_op' id='alamat_op' value='<?= $data_wp->JALAN . " Blok " . $data_wp->BLOK . " RT " . $data_wp->RT . " RW " . $data_wp->RW ?>' readonly />
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -94,7 +100,7 @@
                                         <div class="row">
                                             <div class="col text-center">
                                                 <p>NIK/NIB</p>
-                                                <embed src="http://etax.bekasikota.go.id/assets/lampiran/nik_nib/<?= $lampiran_nik->name?>" type="application/pdf" width="100%" height="500px" />
+                                                <embed src="http://etax.bekasikota.go.id/assets/lampiran/nik_nib/<?= $lampiran_nik->name ?>" type="application/pdf" width="100%" height="500px" />
                                             </div>
                                         </div>
                                     <?php endif ?>
@@ -103,7 +109,7 @@
                                         <div class="row">
                                             <div class="col text-center">
                                                 <p>NPWP</p>
-                                                <embed src="http://etax.bekasikota.go.id/assets/lampiran/npwp/<?= $lampiran_npwp->name?>" type="application/pdf" width="100%" height="500px" />
+                                                <embed src="http://etax.bekasikota.go.id/assets/lampiran/npwp/<?= $lampiran_npwp->name ?>" type="application/pdf" width="100%" height="500px" />
                                             </div>
                                         </div>
                                     <?php endif ?>
@@ -112,20 +118,20 @@
                                         <div class="row">
                                             <div class="col text-center">
                                                 <p>Akta Pendirian</p>
-                                                <!-- <img class="img-fluid" src="http://sipdah.bekasikota.go.id/etax/assets/lampiran/akta_pendirian/<?= $lampiran_akta->name?>" alt="<?= $lampiran_akta->name?>"> -->
-                                                <embed src="http://etax.bekasikota.go.id/assets/lampiran/akta_pendirian/<?= $lampiran_akta->name?>" type="application/pdf" width="100%" height="500px" />
+                                                <!-- <img class="img-fluid" src="http://sipdah.bekasikota.go.id/etax/assets/lampiran/akta_pendirian/<?= $lampiran_akta->name ?>" alt="<?= $lampiran_akta->name ?>"> -->
+                                                <embed src="http://etax.bekasikota.go.id/assets/lampiran/akta_pendirian/<?= $lampiran_akta->name ?>" type="application/pdf" width="100%" height="500px" />
                                             </div>
                                         </div>
                                     <?php endif ?>
                                     <hr>
                                     <?php if (isset($lampiran_sipa)) : ?>
                                         <div class="row">
-                                        <div class="col text-center">
-                                            <p>SIPA</p>
-                                            <!-- <img class="img-fluid" src="http://sipdah.bekasikota.go.id/etax/assets/lampiran/akta_pendirian/<?= $lampiran_sipa->name?>" alt="<?= $lampiran_sipa->name?>"> -->
-                                            <embed src="http://etax.bekasikota.go.id/assets/lampiran/sipa/<?= $lampiran_sipa->name?>" type="application/pdf" width="100%" height="500px" />
+                                            <div class="col text-center">
+                                                <p>SIPA</p>
+                                                <!-- <img class="img-fluid" src="http://sipdah.bekasikota.go.id/etax/assets/lampiran/akta_pendirian/<?= $lampiran_sipa->name ?>" alt="<?= $lampiran_sipa->name ?>"> -->
+                                                <embed src="http://etax.bekasikota.go.id/assets/lampiran/sipa/<?= $lampiran_sipa->name ?>" type="application/pdf" width="100%" height="500px" />
+                                            </div>
                                         </div>
-                                    </div>
                                     <?php endif ?>
                                 </div>
 
@@ -164,7 +170,7 @@
         timer: 3000
     });
 
-    function hapus(){
+    function hapus() {
         let wp_id = $("#wp_id").val();
         let url = "<?php echo site_url('verifikasi_wp/batal_verifikasi') ?>";
         if (confirm('Anda yakin ingin membatalkan verifikasi?')) {
@@ -182,12 +188,12 @@
                             response.message,
                             'error'
                         )
-                    }else {
+                    } else {
                         Swal.fire(
                             'Berhasil',
                             response.message,
                             'success'
-                        ) 
+                        )
                     }
                 },
                 error: function(xhr, thrownError) {
