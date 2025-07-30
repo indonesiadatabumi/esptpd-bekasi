@@ -46,21 +46,25 @@ class Pendaftaranwp extends CI_Controller
         echo json_encode($result);
     }
 
-    function get_kegus()
+    public function get_kegus()
     {
-        $pajakid = '';
         $pajakid = $this->input->post('pajakid');
 
-        // var_dump($pajakid);
+        if (!is_numeric($pajakid)) {
+            http_response_code(400);
+            exit("Invalid parameter.");
+        }
+
         if ($pajakid) {
             $result = $this->Mod_pendaftaranwp->get_kegiatan_usaha($pajakid);
             foreach ($result as $row) {
-                echo '<option value="' . $row->ref_kegus_id . '"> ' . $row->nama_kegus . '</option>';
+                $ref_id = htmlspecialchars($row->ref_kegus_id, ENT_QUOTES, 'UTF-8');
+                $nama_kegus = htmlspecialchars($row->nama_kegus, ENT_QUOTES, 'UTF-8');
+                echo '<option value="' . $ref_id . '">' . $nama_kegus . '</option>';
             }
         } else {
             echo '<option value=""> - Silakan Pilih Jenis Usaha - </option>';
         }
-        // echo json_encode($result);
     }
 
     function get_kecamatan()
@@ -442,7 +446,7 @@ class Pendaftaranwp extends CI_Controller
                         'jumlah_karyawan' => $jml_karyawan
                     );
                     $table = 'wp_wr_restoran';
-                } 
+                }
                 $insert_detil = $this->Mod_pendaftaranwp->insert($table, $arr_save);
 
                 // $npwprd = $this->Mod_pendaftaranwp->get_record_value('npwprd', 'v_wp_wr', "wp_wr_id='" . $next_val . "'");
