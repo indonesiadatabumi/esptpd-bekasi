@@ -43,7 +43,6 @@
             });
         });
     });
-
 </script>
 
 <!-- Main content -->
@@ -132,7 +131,7 @@
 
                                                 <div class="input-group date" id="searchStartDate" data-target-input="nearest">
                                                     <!-- onchange="changeDate(this);" -->
-                                                    <input type="text" class="form-control datetimepicker-input StartDate" name="spt_periode_jual1" id="StartDate" value="<?= $masa_awal ?>" maxlength="12" placeholder="yyyy-mm-dd" style="background-color:bisque;" data-target="#searchStartDate"/>
+                                                    <input type="text" class="form-control datetimepicker-input StartDate" name="spt_periode_jual1" id="StartDate" value="<?= $masa_awal ?>" maxlength="12" placeholder="yyyy-mm-dd" style="background-color:bisque;" data-target="#searchStartDate" />
                                                     <div class="input-group-append" data-target="#searchStartDate" data-toggle="datetimepicker">
                                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                     </div>
@@ -142,7 +141,7 @@
                                         <div class="col-xs-3 col-sm-3">
                                             <div class="form-group">
                                                 <div class="input-group date" id="searchEndDate" data-target-input="nearest">
-                                                    <input type="text" class="form-control datetimepicker-input EndDate" name="spt_periode_jual2" id="EndDate" value="<?= $masa_akhir ?>" maxlength="12" placeholder="yyyy-mm-dd" style="background-color:bisque;" data-target="#searchEndDate"/>
+                                                    <input type="text" class="form-control datetimepicker-input EndDate" name="spt_periode_jual2" id="EndDate" value="<?= $masa_akhir ?>" maxlength="12" placeholder="yyyy-mm-dd" style="background-color:bisque;" data-target="#searchEndDate" />
                                                     <div class="input-group-append" data-target="#searchEndDate" data-toggle="datetimepicker">
                                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                     </div>
@@ -158,7 +157,7 @@
                                     <label for="password">Periode Lapor SPT</label>
                                 </td>
                                 <td>
-                                    <input type="text" name="spt_periode" id="spt_periode" size="11" value="<?= date('Y')?>" class="form-control-sm" style="background-color:bisque;"/>
+                                    <input type="text" name="spt_periode" id="spt_periode" size="11" value="<?= date('Y') ?>" class="form-control-sm" style="background-color:bisque;" />
                                 </td>
                             </tr>
                             <tr>
@@ -166,7 +165,7 @@
                                     <label for="name">Kode Rekening </label>
                                 </td>
                                 <td>
-                                    <input type="hidden" name="kd_rekening" id="kd_rekening" class="form-control-sm" value="12"/>
+                                    <input type="hidden" name="kd_rekening" id="kd_rekening" class="form-control-sm" value="12" />
                                     <input type="text" class="form-control-sm" value="41103" size="30" readonly="true" style="background-color:azure;" />
                                 </td>
                             </tr>
@@ -186,19 +185,19 @@
                                         <option value="428">Film Nasional</option>
                                         <option value="426">Pagelaran Kesenian, Tari, dan/atau Pagelaran Busana</option>
                                         <option value="425">Pagelaran Kesenian, Tari</option>
-                                        <option value="424">rekreasi wahana air, wahana ekologi, wahana pendidikan, wahana budaya, agrowisata,dan kebun binatang</option>
+                                        <option value="424">rekreasi wahana air, rekreasi wahana salju, wahana ekologi, wahana pendidikan, wahana budaya, agrowisata,dan kebun binatang</option>
                                         <option value="344">Pagelaran Musik</option>
-                                        <option value="351">rekreasi wahana salju, wahana permainan, pemancingan</option>
+                                        <!-- <option value="351">rekreasi wahana salju, wahana permainan, pemancingan</option> -->
                                         <option value="376">Sirkus, Akrobat dan Sulap</option>
-                                        <option value="14">Kontes Kecantikan, Binaraga dan Sejenisnya</option>                                        
+                                        <option value="14">Kontes Kecantikan, Binaraga dan Sejenisnya</option>
                                         <option value="359">Kontes Kecantikan, Binaraga dan Sejenisnya yang Berkelas Internasional</option>
                                         <option value="358">Pameran yang Bersifat Komersial</option>
-                                       <!-- <option value="15">Diskotik, Karaoke, Klab Malam, Pub dan Sejenisnya</option> -->
+                                        <!-- <option value="15">Diskotik, Karaoke, Klab Malam, Pub dan Sejenisnya</option> -->
                                         <option value="78">Diskotik, Klub malam, Pub dan Sejenisnya</option>
-                                        <option value="378">Karaoke, Rumah Bernyanyi</option> 
+                                        <option value="378">Karaoke, Rumah Bernyanyi</option>
                                         <option value="16">Kolam Renang</option>
                                         <option value="69">Permainan Bilyard, Bowling</option>
-                                       <!-- <option value="18">Pacuan Kuda, Kendaraan Bermotor, Road Race, Gelanggang Permainan Anak dan atau Permainan Ketangkasan</option> -->
+                                        <!-- <option value="18">Pacuan Kuda, Kendaraan Bermotor, Road Race, Gelanggang Permainan Anak dan atau Permainan Ketangkasan</option> -->
                                         <option value="70">Gelanggang Permainan Anak dan atau Permainan Ketangkasan</option>
                                         <option value="77">Pacuan Kuda, Kendaraan Bermotor, Road Race</option>
                                         <option value="72">Permainan seluncur es (Ice Skating)</option>
@@ -206,7 +205,7 @@
                                         <option value="79">Panti Pijat, Refleksi</option>
                                         <option value="373">Fitnes</option>
                                         <option value="19">Panti Pijat Modern, Panti Pijat Tradisional dan Refleksi</option>
-                                       <!-- <option value="430">Fitnes (Pusat Kebugaran)</option> -->
+                                        <!-- <option value="430">Fitnes (Pusat Kebugaran)</option> -->
                                         <option value="20">Mandi Uap/SPA</option>
                                         <option value="21">Pertandingan Olahraga</option>
                                         <option value="351">Olahraga Permainan dengan Menggunakan Tempat/Ruang dan/atau Peralatan dan Perlengkapan</option>
