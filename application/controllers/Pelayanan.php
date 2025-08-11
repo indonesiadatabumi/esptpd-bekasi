@@ -250,33 +250,33 @@ class Pelayanan extends MY_Controller
         $masa_pajak = date('Y-m-d', strtotime('+1 month', strtotime($billing->spt_periode_jual1)));
         $explode = explode('-', $billing->spt_periode_jual1);
 
-        if ($explode[0] <= '2023' && $explode[1] <= '12') {// jatuh tempo bayar
+        if ($explode[0] <= '2023' && $explode[1] <= '12') { // jatuh tempo bayar
             $tgljatuhtempo = date("Y-m-30", strtotime($masa_pajak));
             $sanksi_lapor = 0;
-        }else{
-            $tgljatuhtempo = date("Y-m-10", strtotime($masa_pajak));// jatuh tempo bayar
+        } else {
+            $tgljatuhtempo = date("Y-m-11", strtotime($masa_pajak)); // jatuh tempo bayar
 
-            if(date('d') > '15' && $billing->status_bayar == 0){
+            if (date('d') > '15' && $billing->status_bayar == 0) {
                 $sanksi_lapor = 100000;
-            }else{
+            } else {
                 $pajak_lalu = date('Y-m-d', strtotime('-1 month', strtotime($billing->spt_periode_jual1)));
-                $explode_pajak_lalu = explode('-',$pajak_lalu);
+                $explode_pajak_lalu = explode('-', $pajak_lalu);
 
                 if ($explode_pajak_lalu[0] <= '2023' && $explode_pajak_lalu[1] <= '16') {
-                        $sanksi_lapor = 0;
-                }else{
+                    $sanksi_lapor = 0;
+                } else {
                     $cek_lapor_pajak = $this->Mod_pelayanan->cek_lapor_pajak($pajak_lalu, $billing->spt_idwpwr);
                     // $tgl_lapor_lalu = date('d', strtotime($cek_lapor_pajak->tgl_lapor));
                     if ($cek_lapor_pajak == null || date('d', strtotime($cek_lapor_pajak->tgl_lapor)) > '15') {
                         $sanksi_lapor = 100000;
-                    }else{
+                    } else {
                         $sanksi_lapor = 0;
                     }
                 }
             }
             // $tgljatuhtempo = date("Y-m-12", strtotime($masa_pajak));
             // $cek_lapor_pajak = $this->Mod_esptpd->cek_lapor_pajak($billing->spt_periode_jual1, $billing->spt_idwpwr);
-                
+
             // if ($cek_lapor_pajak->tgl_lapor == null || date('d', strtotime($cek_lapor_pajak->tgl_lapor)) > '15') {
             //     $sanksi_lapor = 100000;
             // }else{
@@ -292,13 +292,13 @@ class Pelayanan extends MY_Controller
             // foreach ($list_denda as $list_denda) {
             //     $tgl_setor = $billing->setorpajret_tgl_bayar;
             // }
-            
+
             // $jml_denda = $this->fungsi->denda($tgljatuhtempo, $tgl_setor, $billing->spt_pajak);
             $get_denda = $this->Mod_pelayanan->getDendaLunas($billing->spt_kode_billing, $billing->spt_periode);
-            
+
             if ($get_denda['denda'] == null) {
                 $jml_denda = 0;
-            }else {
+            } else {
                 $jml_denda = $get_denda['denda'];
             }
         }
@@ -460,33 +460,33 @@ class Pelayanan extends MY_Controller
         $masa_pajak = date('Y-m-d', strtotime('+1 month', strtotime($billing->spt_periode_jual1)));
         $explode = explode('-', $billing->spt_periode_jual1);
 
-        if ($explode[0] <= '2023' && $explode[1] <= '10') {// jatuh tempo bayar
+        if ($explode[0] <= '2023' && $explode[1] <= '10') { // jatuh tempo bayar
             $tgljatuhtempo = date("Y-m-30", strtotime($masa_pajak));
             $sanksi_lapor = 0;
-        }else{
-            $tgljatuhtempo = date("Y-m-10", strtotime($masa_pajak));// jatuh tempo bayar
+        } else {
+            $tgljatuhtempo = date("Y-m-11", strtotime($masa_pajak)); // jatuh tempo bayar
 
-            if(date('d') > '15' && $billing->status_bayar == 0){
+            if (date('d') > '15' && $billing->status_bayar == 0) {
                 $sanksi_lapor = 100000;
-            }else{
+            } else {
                 $pajak_lalu = date('Y-m-d', strtotime('-1 month', strtotime($billing->spt_periode_jual1)));
-                $explode_pajak_lalu = explode('-',$pajak_lalu);
+                $explode_pajak_lalu = explode('-', $pajak_lalu);
 
                 if ($explode_pajak_lalu[0] <= '2023' && $explode_pajak_lalu[1] <= '16') {
-                        $sanksi_lapor = 0;
-                }else{
+                    $sanksi_lapor = 0;
+                } else {
                     $cek_lapor_pajak = $this->Mod_pelayanan->cek_lapor_pajak($pajak_lalu, $billing->spt_idwpwr);
                     // $tgl_lapor_lalu = date('d', strtotime($cek_lapor_pajak->tgl_lapor));
                     if ($cek_lapor_pajak == null || date('d', strtotime($cek_lapor_pajak->tgl_lapor)) > '15') {
                         $sanksi_lapor = 100000;
-                    }else{
+                    } else {
                         $sanksi_lapor = 0;
                     }
                 }
             }
             // $tgljatuhtempo = date("Y-m-12", strtotime($masa_pajak));
             // $cek_lapor_pajak = $this->Mod_esptpd->cek_lapor_pajak($billing->spt_periode_jual1, $billing->spt_idwpwr);
-                
+
             // if ($cek_lapor_pajak->tgl_lapor == null || date('d', strtotime($cek_lapor_pajak->tgl_lapor)) > '15') {
             //     $sanksi_lapor = 100000;
             // }else{
@@ -499,7 +499,7 @@ class Pelayanan extends MY_Controller
         } else {
             $tgl_setor = '';
             $list_denda = $this->Mod_pelayanan->getDenda($billing->spt_idwpwr, $billing->spt_periode, $billing->spt_nomor);
-           
+
             foreach ($list_denda as $list_denda) {
                 $tgl_setor = $list_denda->setorpajret_tgl_bayar;
             }
@@ -507,7 +507,7 @@ class Pelayanan extends MY_Controller
             $jml_denda = $this->fungsi->denda($tgljatuhtempo, $tgl_setor, $billing->spt_pajak);
             // $jml_denda = 0;
         }
-        
+
         if ($billing->status_bayar == 0) {
             $jml_denda = $this->fungsi->denda($tgljatuhtempo, date("Y-m-d"), $billing->spt_pajak);
         } else {
@@ -519,10 +519,10 @@ class Pelayanan extends MY_Controller
 
             // $jml_denda = $this->fungsi->denda($tgljatuhtempo, $tgl_setor, $billing->spt_pajak);
             $get_denda = $this->Mod_pelayanan->getDendaLunas($billing->spt_kode_billing, $billing->spt_periode);
-            
+
             if ($get_denda['denda'] == null) {
                 $jml_denda = 0;
-            }else {
+            } else {
                 $jml_denda = $get_denda['denda'];
             }
         }
@@ -678,11 +678,11 @@ class Pelayanan extends MY_Controller
         ini_set('memory_limit', '512M');
         set_time_limit(3600);
 
-        if ($this->session->userdata('id_level') == 17){
+        if ($this->session->userdata('id_level') == 17) {
             $list = $this->Mod_pelayanan->get_datatables_uptd($this->session->userdata('wilayah_uptd'));
             $count_all = $this->Mod_pelayanan->count_all_uptd($this->session->userdata('wilayah_uptd'));
             $count_filter = $this->Mod_pelayanan->count_filtered_uptd($this->session->userdata('wilayah_uptd'));
-        }else{
+        } else {
             $list = $this->Mod_pelayanan->get_datatables();
             $count_all = $this->Mod_pelayanan->count_all();
             $count_filter = $this->Mod_pelayanan->count_filtered();
@@ -732,10 +732,10 @@ class Pelayanan extends MY_Controller
             // $nama = $this->Mod_pelayanan->get_nama_wp()
 
             $nama = $this->Mod_pelayanan->get_nama_wp($biling->spt_idwpwr);
-            
+
             if ($biling->tgl_lapor != null) {
                 $tgl_lapor = $biling->tgl_lapor;
-            }else{
+            } else {
                 $tgl_lapor = '-';
             }
 

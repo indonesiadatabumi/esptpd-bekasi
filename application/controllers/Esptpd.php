@@ -374,7 +374,7 @@ class Esptpd extends MY_Controller
             $data['act'] = 'add';
         }
 
-        $data['lampiran'] = $billing_id.".pdf";
+        $data['lampiran'] = $billing_id . ".pdf";
 
         $data['billing_id'] = $billing_id;
 
@@ -468,33 +468,33 @@ class Esptpd extends MY_Controller
         $masa_pajak = date('Y-m-d', strtotime('+1 month', strtotime($billing->spt_periode_jual1)));
         $explode = explode('-', $billing->spt_periode_jual1);
 
-        if ($explode[0] <= '2023' && $explode[1] <= '12') {// jatuh tempo bayar
+        if ($explode[0] <= '2023' && $explode[1] <= '12') { // jatuh tempo bayar
             $tgljatuhtempo = date("Y-m-30", strtotime($masa_pajak));
             $sanksi_lapor = 0;
-        }else{
-            $tgljatuhtempo = date("Y-m-10", strtotime($masa_pajak));// jatuh tempo bayar
+        } else {
+            $tgljatuhtempo = date("Y-m-11", strtotime($masa_pajak)); // jatuh tempo bayar
 
-            if(date('d') > '15' && $billing->status_bayar == 0){
+            if (date('d') > '15' && $billing->status_bayar == 0) {
                 $sanksi_lapor = 100000;
-            }else{
+            } else {
                 $pajak_lalu = date('Y-m-d', strtotime('-1 month', strtotime($billing->spt_periode_jual1)));
-                $explode_pajak_lalu = explode('-',$pajak_lalu);
+                $explode_pajak_lalu = explode('-', $pajak_lalu);
 
                 if ($explode_pajak_lalu[0] <= '2023' && $explode_pajak_lalu[1] <= '16') {
-                        $sanksi_lapor = 0;
-                }else{
+                    $sanksi_lapor = 0;
+                } else {
                     $cek_lapor_pajak = $this->Mod_esptpd->cek_lapor_pajak($pajak_lalu, $billing->spt_idwpwr);
                     // $tgl_lapor_lalu = date('d', strtotime($cek_lapor_pajak->tgl_lapor));
                     if ($cek_lapor_pajak == null || date('d', strtotime($cek_lapor_pajak->tgl_lapor)) > '15') {
                         $sanksi_lapor = 100000;
-                    }else{
+                    } else {
                         $sanksi_lapor = 0;
                     }
                 }
             }
             // $tgljatuhtempo = date("Y-m-12", strtotime($masa_pajak));
             // $cek_lapor_pajak = $this->Mod_esptpd->cek_lapor_pajak($billing->spt_periode_jual1, $billing->spt_idwpwr);
-                
+
             // if ($cek_lapor_pajak->tgl_lapor == null || date('d', strtotime($cek_lapor_pajak->tgl_lapor)) > '15') {
             //     $sanksi_lapor = 100000;
             // }else{
@@ -512,14 +512,14 @@ class Esptpd extends MY_Controller
             // }
             // $jml_denda = $this->fungsi->denda($tgljatuhtempo, $tgl_setor, $billing->spt_pajak);
             $get_denda = $this->Mod_esptpd->getDendaLunas($billing->spt_kode_billing, $billing->spt_periode);
-            
+
             if ($get_denda[0]->denda == null) {
                 $jml_denda = 0;
-            }else {
+            } else {
                 $jml_denda = $get_denda[0]->denda;
             }
         }
-        
+
         $bln = date("n", strtotime($billing->spt_periode_jual1));
 
         if ($billing->spt_pajak < 10) {
@@ -535,7 +535,7 @@ class Esptpd extends MY_Controller
         // }else{
         //     $denda = 0;
         // }
-        
+
         $data['jml_denda'] = $jml_denda;
         $data['pajakdibayar'] = $pajakdibayar;
         $data['nihil'] = $nihil;
@@ -775,33 +775,33 @@ class Esptpd extends MY_Controller
         $masa_pajak = date('Y-m-d', strtotime('+1 month', strtotime($billing->spt_periode_jual1)));
         $explode = explode('-', $billing->spt_periode_jual1);
 
-        if ($explode[0] <= '2023' && $explode[1] <= '10') {// jatuh tempo bayar
+        if ($explode[0] <= '2023' && $explode[1] <= '10') { // jatuh tempo bayar
             $tgljatuhtempo = date("Y-m-30", strtotime($masa_pajak));
             $sanksi_lapor = 0;
-        }else{
-            $tgljatuhtempo = date("Y-m-10", strtotime($masa_pajak));// jatuh tempo bayar
+        } else {
+            $tgljatuhtempo = date("Y-m-11", strtotime($masa_pajak)); // jatuh tempo bayar
 
-            if(date('d') > '15' && $billing->status_bayar == 0){
+            if (date('d') > '15' && $billing->status_bayar == 0) {
                 $sanksi_lapor = 100000;
-            }else{
+            } else {
                 $pajak_lalu = date('Y-m-d', strtotime('-1 month', strtotime($billing->spt_periode_jual1)));
-                $explode_pajak_lalu = explode('-',$pajak_lalu);
+                $explode_pajak_lalu = explode('-', $pajak_lalu);
 
                 if ($explode_pajak_lalu[0] <= '2023' && $explode_pajak_lalu[1] <= '16') {
-                        $sanksi_lapor = 0;
-                }else{
+                    $sanksi_lapor = 0;
+                } else {
                     $cek_lapor_pajak = $this->Mod_esptpd->cek_lapor_pajak($pajak_lalu, $billing->spt_idwpwr);
                     // $tgl_lapor_lalu = date('d', strtotime($cek_lapor_pajak->tgl_lapor));
                     if ($cek_lapor_pajak == null || date('d', strtotime($cek_lapor_pajak->tgl_lapor)) > '15') {
                         $sanksi_lapor = 100000;
-                    }else{
+                    } else {
                         $sanksi_lapor = 0;
                     }
                 }
             }
             // $tgljatuhtempo = date("Y-m-12", strtotime($masa_pajak));
             // $cek_lapor_pajak = $this->Mod_esptpd->cek_lapor_pajak($billing->spt_periode_jual1, $billing->spt_idwpwr);
-                
+
             // if ($cek_lapor_pajak->tgl_lapor == null || date('d', strtotime($cek_lapor_pajak->tgl_lapor)) > '15') {
             //     $sanksi_lapor = 100000;
             // }else{
@@ -814,21 +814,21 @@ class Esptpd extends MY_Controller
         } else {
             // $tgl_setor = '';
             // $list_denda = $this->Mod_esptpd->getDenda($billing->spt_idwpwr, $billing->spt_periode, $billing->spt_nomor);
-           
+
             // foreach ($list_denda as $list_denda) {
             //     $tgl_setor = $list_denda->setorpajret_tgl_bayar;
             // }
 
             // $jml_denda = $this->fungsi->denda($tgljatuhtempo, $tgl_setor, $billing->spt_pajak);
             $get_denda = $this->Mod_esptpd->getDendaLunas($billing->spt_kode_billing, $billing->spt_periode);
-            
+
             if ($get_denda['denda'] == null) {
                 $jml_denda = 0;
-            }else {
+            } else {
                 $jml_denda = $get_denda['denda'];
             }
         }
-       
+
         $bln = date("n", strtotime($billing->spt_periode_jual1));
 
         if ($billing->spt_pajak < 10) {
@@ -999,16 +999,16 @@ class Esptpd extends MY_Controller
             $no++;
             $tgljatuhtempo = date('Y-m-d', strtotime('+1 month', strtotime($biling->spt_periode_jual1)));
             $b_entryuu = date("m", strtotime($tgljatuhtempo)) - 1;
-            if(date("m", strtotime($biling->spt_periode_jual1)) == '01'){
-                if(date("d", strtotime($biling->spt_periode_jual1)) == '01'){
+            if (date("m", strtotime($biling->spt_periode_jual1)) == '01') {
+                if (date("d", strtotime($biling->spt_periode_jual1)) == '01') {
                     $t_entry = date("Y-m-d", strtotime('+27 days', strtotime($tgljatuhtempo)));
-                }else{
+                } else {
                     $t_entry = date("Y-m-30", strtotime($tgljatuhtempo));
                 }
-            }else {
-                if(date("d", strtotime($biling->spt_periode_jual1)) == '01'){
+            } else {
+                if (date("d", strtotime($biling->spt_periode_jual1)) == '01') {
                     $t_entry = date("Y-m-d", strtotime('+29 days', strtotime($tgljatuhtempo)));
-                }else{
+                } else {
                     $t_entry = date("Y-m-30", strtotime($tgljatuhtempo));
                 }
             }
@@ -1063,12 +1063,12 @@ class Esptpd extends MY_Controller
                         <a class=\"btn btn-xs btn-outline-info\" href=\"javascript:void(0)\" id=\"esptpd\" title=\"esptpd\" data-href=" . $biling->spt_id . "/" . $biling->spt_jenis_pajakretribusi . "><i class=\"fas fa-print\"></i> Esptpd</a>
                         <a class=\"btn btn-xs btn-outline-success\" href=\"javascript:void(0)\" id=\"billing\" title=\"billing\" data-href=" . $biling->spt_id . "/" . $biling->spt_jenis_pajakretribusi . "><i class=\"fas fa-print\"></i> Billing</a>
                         <a class=\"btn btn-xs btn-outline-warning\" id=\"edit\" href=\"javascript:void(0)\" title=\"Edit\" data-href=" . $biling->spt_kode_billing . "><i class=\"fas fa-link\"> Lampiran</i></a>";
-                        if($biling->status_bayar == 0 && $biling->spt_pajak >= 10000000){
-                            $aksi .= "<a class=\"load_va\" id=\"va\" href=\"javascript:void(0)\" title=\"VA\" data-href=" . $biling->spt_kode_billing . "><img src='".base_url()."/assets/foto/logo/virtualaccount.png' style='height: 50px; width: 50px;'></a>";
-                        } elseif ($biling->status_bayar == 0){
-                            $aksi .= "<a class=\"load_va\" id=\"va\" href=\"javascript:void(0)\" title=\"VA\" data-href=" . $biling->spt_kode_billing . "><img src='".base_url()."/assets/foto/logo/virtualaccount.png' style='height: 50px; width: 50px;'></a>
-                            <a class=\"load_qris\" id=\"qris\" href=\"javascript:void(0)\" title=\"QRIS\" data-href=" . $biling->spt_kode_billing . "><img src='".base_url()."/assets/foto/logo/qris.png' style='height: 50px; width: 50px;'></a>";
-                        }
+                if ($biling->status_bayar == 0 && $biling->spt_pajak >= 10000000) {
+                    $aksi .= "<a class=\"load_va\" id=\"va\" href=\"javascript:void(0)\" title=\"VA\" data-href=" . $biling->spt_kode_billing . "><img src='" . base_url() . "/assets/foto/logo/virtualaccount.png' style='height: 50px; width: 50px;'></a>";
+                } elseif ($biling->status_bayar == 0) {
+                    $aksi .= "<a class=\"load_va\" id=\"va\" href=\"javascript:void(0)\" title=\"VA\" data-href=" . $biling->spt_kode_billing . "><img src='" . base_url() . "/assets/foto/logo/virtualaccount.png' style='height: 50px; width: 50px;'></a>
+                            <a class=\"load_qris\" id=\"qris\" href=\"javascript:void(0)\" title=\"QRIS\" data-href=" . $biling->spt_kode_billing . "><img src='" . base_url() . "/assets/foto/logo/qris.png' style='height: 50px; width: 50px;'></a>";
+                }
             } else {
 
                 $aksi = "<a class=\"btn btn-xs btn-outline-info\" href=\"javascript:void(0)\" id=\"esptpd\" title=\"esptpd\" data-href=" . $biling->spt_id . "/" . $biling->spt_jenis_pajakretribusi . "><i class=\"fas fa-print\"></i> Esptpd</a>
@@ -1078,12 +1078,12 @@ class Esptpd extends MY_Controller
                         <a class=\"btn btn-xs btn-outline-danger\" id=\"delete\" href=\"javascript:void(0)\" title=\"delete\" data-href=" . $biling->spt_kode_billing . "><i class=\"fas fa-trash\"> Hapus</i></a>-->
                         <a class=\"btn btn-xs btn-outline-warning\" id=\"edit\" href=\"javascript:void(0)\" title=\"Edit\" data-href=" . $biling->spt_kode_billing . "><i class=\"fas fa-link\"> Lampiran</i></a>";
 
-                        if($biling->status_bayar == 0 && $biling->spt_pajak >= 10000000){
-                            $aksi .= "<a class=\"load_va\" id=\"va\" href=\"javascript:void(0)\" title=\"VA\" data-href=" . $biling->spt_kode_billing . "><img src='".base_url()."/assets/foto/logo/virtualaccount.png' style='height: 50px; width: 50px;'></a>";
-                        } elseif ($biling->status_bayar == 0){
-                            $aksi .= "<a class=\"load_va\" id=\"va\" href=\"javascript:void(0)\" title=\"VA\" data-href=" . $biling->spt_kode_billing . "><img src='".base_url()."/assets/foto/logo/virtualaccount.png' style='height: 50px; width: 50px;'></a>
-                            <a class=\"load_qris\" id=\"qris\" href=\"javascript:void(0)\" title=\"QRIS\" data-href=" . $biling->spt_kode_billing . "><img src='".base_url()."/assets/foto/logo/qris.png' style='height: 50px; width: 50px;'></a>";
-                        }
+                if ($biling->status_bayar == 0 && $biling->spt_pajak >= 10000000) {
+                    $aksi .= "<a class=\"load_va\" id=\"va\" href=\"javascript:void(0)\" title=\"VA\" data-href=" . $biling->spt_kode_billing . "><img src='" . base_url() . "/assets/foto/logo/virtualaccount.png' style='height: 50px; width: 50px;'></a>";
+                } elseif ($biling->status_bayar == 0) {
+                    $aksi .= "<a class=\"load_va\" id=\"va\" href=\"javascript:void(0)\" title=\"VA\" data-href=" . $biling->spt_kode_billing . "><img src='" . base_url() . "/assets/foto/logo/virtualaccount.png' style='height: 50px; width: 50px;'></a>
+                            <a class=\"load_qris\" id=\"qris\" href=\"javascript:void(0)\" title=\"QRIS\" data-href=" . $biling->spt_kode_billing . "><img src='" . base_url() . "/assets/foto/logo/qris.png' style='height: 50px; width: 50px;'></a>";
+                }
             }
 
 
@@ -1102,10 +1102,10 @@ class Esptpd extends MY_Controller
                 $stat_register  = $pelayanan->stat_register;
             }
 
-            if ($biling->status_bayar == 0){
+            if ($biling->status_bayar == 0) {
                 $denda = $jml_denda;
                 $total_bayar = $biling->spt_pajak + $jml_denda;
-            }else{
+            } else {
                 $denda = 0;
                 $total_bayar = $biling->spt_pajak;
             }
@@ -1157,37 +1157,37 @@ class Esptpd extends MY_Controller
             $no++;
             $tgljatuhtempo = date('Y-m-d', strtotime('+1 month', strtotime($biling->spt_periode_jual1)));
             $b_entryuu = date("m", strtotime($tgljatuhtempo)) - 1;
-            $explode = explode('-',$biling->spt_periode_jual1 );
+            $explode = explode('-', $biling->spt_periode_jual1);
             if ($explode[0] <= '2023' && $explode[1] <= '10' || $biling->spt_periode_jual1 < '2024-01-01') {
                 $t_entry = date("Y-m-30", strtotime($tgljatuhtempo));
                 $sanksi_lapor = 0;
-            }else{
-                $t_entry = date("Y-m-10", strtotime($tgljatuhtempo));//jatuh tempo bayar
+            } else {
+                $t_entry = date("Y-m-11", strtotime($tgljatuhtempo)); //jatuh tempo bayar
 
-                if(date('d') > '15' && $biling->status_bayar == 0){//jatuh tempo lapor
+                if (date('d') > '15' && $biling->status_bayar == 0) { //jatuh tempo lapor
                     $sanksi_lapor = 100000;
-                }else{
+                } else {
                     $pajak_lalu = date('Y-m-d', strtotime('-1 month', strtotime($biling->spt_periode_jual1)));
-                    $explode_pajak_lalu = explode('-',$pajak_lalu);
+                    $explode_pajak_lalu = explode('-', $pajak_lalu);
 
-                    if ($explode_pajak_lalu[0] <= '2023' && $explode_pajak_lalu[1] <= '10') {//jatuh tempo bayar
+                    if ($explode_pajak_lalu[0] <= '2023' && $explode_pajak_lalu[1] <= '10') { //jatuh tempo bayar
                         $sanksi_lapor = 0;
-                    }else{
+                    } else {
                         $cek_lapor_pajak = $this->Mod_esptpd->cek_lapor_pajak($pajak_lalu, $biling->spt_idwpwr);
-                        if ($cek_lapor_pajak == null || date('d', strtotime($cek_lapor_pajak->tgl_lapor)) > '15') {//jatuh tempo lapor
+                        if ($cek_lapor_pajak == null || date('d', strtotime($cek_lapor_pajak->tgl_lapor)) > '15') { //jatuh tempo lapor
                             $sanksi_lapor = 0;
-                        }else{
+                        } else {
                             $sanksi_lapor = 0;
                         }
                     }
                 }
             }
-            
+
 
             if ($biling->status_bayar == 0) {
                 if ($biling->spt_periode_jual1 < '2024-01-01') {
                     $jml_denda = 0;
-                }else{
+                } else {
                     $jml_denda = $this->fungsi->denda($t_entry, date("Y-m-d"), $biling->spt_pajak);
                 }
             } else {
@@ -1216,35 +1216,35 @@ class Esptpd extends MY_Controller
 
             $masa_entri = substr($biling->spt_periode_jual1, 5, 2);
             $thn_entri = substr($biling->spt_periode_jual1, 0, 4);
-            $explode_entry = explode('-',$biling->spt_tgl_entry );
+            $explode_entry = explode('-', $biling->spt_tgl_entry);
 
-            if($biling->status_bayar == 0){
+            if ($biling->status_bayar == 0) {
                 $aksi = "<a class=\"btn btn-xs btn-outline-primary\" href=" . base_url('esptpd/edit_billing/' . $biling->spt_id . '/' . $biling->spt_jenis_pajakretribusi . '/' . $no_reg) . "><i class=\"fas fa-edit\"></i> Edit</a>
                         <a class=\"btn btn-xs btn-outline-success\" href=\"javascript:void(0)\" id=\"billing\" title=\"billing\" data-href=" . $biling->spt_id . "/" . $biling->spt_jenis_pajakretribusi . "><i class=\"fas fa-print\"></i> Billing</a>";
-                        if($biling->spt_pajak >= 10000000){
-                            $aksi .= "<a class=\"load_va\" id=\"va\" href=\"javascript:void(0)\" title=\"VA\" data-href=" . $biling->spt_kode_billing . "><img src='".base_url()."/assets/foto/logo/virtualaccount.png' style='height: 50px; width: 50px;'></a>";
-                        } else {
-                            $aksi .= "<a class=\"load_va\" id=\"va\" href=\"javascript:void(0)\" title=\"VA\" data-href=" . $biling->spt_kode_billing . "><img src='".base_url()."/assets/foto/logo/virtualaccount.png' style='height: 50px; width: 50px;'></a>
-                            <a class=\"load_qris\" id=\"qris\" href=\"javascript:void(0)\" title=\"QRIS\" data-href=" . $biling->spt_kode_billing . "><img src='".base_url()."/assets/foto/logo/qris.png' style='height: 50px; width: 50px;'></a>";
-                        }
-            }else{
-                if($biling->tgl_lapor == null){
+                if ($biling->spt_pajak >= 10000000) {
+                    $aksi .= "<a class=\"load_va\" id=\"va\" href=\"javascript:void(0)\" title=\"VA\" data-href=" . $biling->spt_kode_billing . "><img src='" . base_url() . "/assets/foto/logo/virtualaccount.png' style='height: 50px; width: 50px;'></a>";
+                } else {
+                    $aksi .= "<a class=\"load_va\" id=\"va\" href=\"javascript:void(0)\" title=\"VA\" data-href=" . $biling->spt_kode_billing . "><img src='" . base_url() . "/assets/foto/logo/virtualaccount.png' style='height: 50px; width: 50px;'></a>
+                            <a class=\"load_qris\" id=\"qris\" href=\"javascript:void(0)\" title=\"QRIS\" data-href=" . $biling->spt_kode_billing . "><img src='" . base_url() . "/assets/foto/logo/qris.png' style='height: 50px; width: 50px;'></a>";
+                }
+            } else {
+                if ($biling->tgl_lapor == null) {
                     if ($explode[0] <= '2023' && $explode[1] <= '16') {
-                        if ($explode_entry[0] >= '2024'){
+                        if ($explode_entry[0] >= '2024') {
                             $aksi = "<a class=\"btn btn-xs btn-outline-primary\" href=" . base_url('esptpd/lapor_pajak/' . $biling->spt_id . '/' . $biling->spt_jenis_pajakretribusi . '/' . $biling->spt_kode_billing) . "><i class=\"fas fa-edit\"></i> Lapor Pajak</a>
                         <a class=\"btn btn-xs btn-outline-success\" href=\"javascript:void(0)\" id=\"billing\" title=\"billing\" data-href=" . $biling->spt_id . "/" . $biling->spt_jenis_pajakretribusi . "><i class=\"fas fa-print\"></i> Billing</a>
                         <a class=\"btn btn-xs btn-outline-warning\" id=\"edit\" href=\"javascript:void(0)\" title=\"Edit\" data-href=" . $biling->spt_kode_billing . "><i class=\"fas fa-link\"> Lampiran</i></a>";
-                        }else{
+                        } else {
                             $aksi = "<a class=\"btn btn-xs btn-outline-info\" href=\"javascript:void(0)\" id=\"esptpd\" title=\"esptpd\" data-href=" . $biling->spt_id . "/" . $biling->spt_jenis_pajakretribusi . "><i class=\"fas fa-print\"></i> Esptpd</a>
                         <a class=\"btn btn-xs btn-outline-success\" href=\"javascript:void(0)\" id=\"billing\" title=\"billing\" data-href=" . $biling->spt_id . "/" . $biling->spt_jenis_pajakretribusi . "><i class=\"fas fa-print\"></i> Billing</a>
                         <a class=\"btn btn-xs btn-outline-warning\" id=\"edit\" href=\"javascript:void(0)\" title=\"Edit\" data-href=" . $biling->spt_kode_billing . "><i class=\"fas fa-link\"> Lampiran</i></a>";
                         }
-                    }else{
+                    } else {
                         $aksi = "<a class=\"btn btn-xs btn-outline-primary\" href=" . base_url('esptpd/lapor_pajak/' . $biling->spt_id . '/' . $biling->spt_jenis_pajakretribusi . '/' . $biling->spt_kode_billing) . "><i class=\"fas fa-edit\"></i> Lapor Pajak</a>
                         <a class=\"btn btn-xs btn-outline-success\" href=\"javascript:void(0)\" id=\"billing\" title=\"billing\" data-href=" . $biling->spt_id . "/" . $biling->spt_jenis_pajakretribusi . "><i class=\"fas fa-print\"></i> Billing</a>
                         <a class=\"btn btn-xs btn-outline-warning\" id=\"edit\" href=\"javascript:void(0)\" title=\"Edit\" data-href=" . $biling->spt_kode_billing . "><i class=\"fas fa-link\"> Lampiran</i></a>";
                     }
-                }else{
+                } else {
                     // $aksi = "<a class=\"btn btn-xs btn-outline-primary\" href=" . base_url('esptpd/edit_laporan/' . $biling->spt_kode_billing) ."><i class=\"fas fa-edit\"></i> Edit Laporan</a>
                     //     <a class=\"btn btn-xs btn-outline-info\" href=\"javascript:void(0)\" id=\"esptpd\" title=\"esptpd\" data-href=" . $biling->spt_id . "/" . $biling->spt_jenis_pajakretribusi . "><i class=\"fas fa-print\"></i> Esptpd</a>
                     //     <a class=\"btn btn-xs btn-outline-success\" href=\"javascript:void(0)\" id=\"billing\" title=\"billing\" data-href=" . $biling->spt_id . "/" . $biling->spt_jenis_pajakretribusi . "><i class=\"fas fa-print\"></i> Billing</a>
@@ -1253,7 +1253,6 @@ class Esptpd extends MY_Controller
                         <a class=\"btn btn-xs btn-outline-success\" href=\"javascript:void(0)\" id=\"billing\" title=\"billing\" data-href=" . $biling->spt_id . "/" . $biling->spt_jenis_pajakretribusi . "><i class=\"fas fa-print\"></i> Billing</a>
                         <a class=\"btn btn-xs btn-outline-warning\" id=\"edit\" href=\"javascript:void(0)\" title=\"Edit\" data-href=" . $biling->spt_kode_billing . "><i class=\"fas fa-link\"> Lampiran</i></a>";
                 }
-                
             }
 
             $list3 = $this->Mod_esptpd->getdataPelayanan($biling->spt_kode_billing);
@@ -1261,32 +1260,32 @@ class Esptpd extends MY_Controller
                 $stat_register  = $pelayanan->stat_register;
             }
 
-            if ($biling->status_bayar == 0){
+            if ($biling->status_bayar == 0) {
                 $denda = $jml_denda;
                 $total_bayar = $biling->spt_pajak + $jml_denda + $sanksi_lapor;
-            }else{
+            } else {
                 $denda = 0;
                 $total_bayar = $biling->spt_pajak;
             }
 
-            if($biling->tgl_lapor == null){
+            if ($biling->tgl_lapor == null) {
                 if ($explode[0] <= '2023' && $explode[1] <= '16') {
                     if ($explode_entry[0] >= '2024') {
                         $status_lapor = "<i class='far fa-times-circle' style='color:red;'></i> <span class='text-danger'>Blm Lapor</span>";
                         $tgl_lapor = '-';
-                    }else{
+                    } else {
                         $status_lapor = "<i class='far fa-check-circle' style='color:green;'></i><span class='text-success'>Sudah Lapor</span>";
                         $tgl_lapor = '-';
                     }
-                }else{
+                } else {
                     $status_lapor = "<i class='far fa-times-circle' style='color:red;'></i> <span class='text-danger'>Blm Lapor</span>";
                     $tgl_lapor = '-';
                 }
-            }else{
+            } else {
                 $status_lapor = "<i class='far fa-check-circle' style='color:green;'></i><span class='text-success'>Sudah Lapor</span>";
                 $tgl_lapor = $biling->tgl_lapor;
             }
-            
+
             $row = array();
             $row[] = $biling->spt_nomor;
             $row[] = $biling->spt_tgl_entry;
@@ -1380,7 +1379,7 @@ class Esptpd extends MY_Controller
         $hari_ini =  date($periode_thn . "-" . $bulan_ke . "-01"); //date("Y-m-d");
         $tgl_pertama = date('Y-m-01', strtotime($hari_ini));
         $tgl_terakhir = date('Y-m-t', strtotime($hari_ini));
-        
+
         $data['masa_awal'] = $tgl_pertama;
         $data['masa_akhir'] = $tgl_terakhir;
         $data['periode_thn'] = $periode_thn;
@@ -1563,7 +1562,7 @@ class Esptpd extends MY_Controller
         $data['kode_spt'] = $list->kode_spt;
 
         $list_spt = $this->Mod_esptpd->data_spt($spt_id);
-        
+
         $data['spt_periode'] = $list_spt->spt_periode;
         $data['spt_periode_jual1'] = $list_spt->spt_periode_jual1;
         $data['spt_periode_jual2'] = $list_spt->spt_periode_jual2;
@@ -1575,11 +1574,12 @@ class Esptpd extends MY_Controller
         $this->template->load('layoutbackend', 'esptpd/edit_billing', $data);
     }
 
-    function lapor_pajak() {
+    function lapor_pajak()
+    {
         $spt_id =  $this->uri->segment(3);
         $jenis_pajak =  $this->uri->segment(4);
         $kode_billing =  $this->uri->segment(5);
-        
+
         switch ($jenis_pajak) {
             case '1':
                 $form_lapor = 'lapor_pajak_hotel';
@@ -1646,10 +1646,11 @@ class Esptpd extends MY_Controller
         echo json_encode($kode_rek);
     }
 
-    public function generate_billing() {
+    public function generate_billing()
+    {
         $spt_nomor = $this->input->post('kd_spt') . "" . $this->input->post('no_sptpd');
         $spt_nomor = (int) $spt_nomor;
-        
+
         $spt_pajak = $this->input->post('spt_pajak');
         if ($spt_pajak != '') {
             $spt_pajak = str_replace('.', '', $spt_pajak);
@@ -1662,16 +1663,16 @@ class Esptpd extends MY_Controller
             $sts_bayar = 0;
 
         $kode_billing = $spt_nomor . date("dmy") . rand(1111, 9999); //101479080320166688
-        
+
         $cek = $this->Mod_esptpd->_cekSPT_nomor($spt_nomor, $this->input->post('spt_periode'), $this->input->post('spt_jenis'));
         $cek_masa_pajak = $this->Mod_esptpd->cek_masa_pajak($this->input->post('spt_periode_jual1'), $this->input->post('spt_periode_jual2'), $this->input->post('wp_id'));
-        if($cek > 0){
+        if ($cek > 0) {
             echo json_encode(array(
                 "error" => True,
                 "msg" => "Nomor SPT Sudah Ada!!. Silahkan refresh SPTPD lalu klik simpan"
             ));
-        }elseif ($cek_masa_pajak > 0){
-            if ($this->input->post('spt_jenis') == '2'){
+        } elseif ($cek_masa_pajak > 0) {
+            if ($this->input->post('spt_jenis') == '2') {
                 $save  = array(
                     'spt_periode' => $this->input->post('spt_periode'),
                     'spt_kode' => $this->input->post('kd_spt'),
@@ -1694,13 +1695,13 @@ class Esptpd extends MY_Controller
                 );
                 $insert_spt =  $this->Mod_esptpd->inserSPT("spt", $save);
                 echo json_encode(array("status" => TRUE));
-            }else{
+            } else {
                 echo json_encode(array(
                     "error" => True,
                     "msg" => "Masa pajak tersebut sudah dilaporkan"
                 ));
             }
-        }else{
+        } else {
             $save  = array(
                 'spt_periode' => $this->input->post('spt_periode'),
                 'spt_kode' => $this->input->post('kd_spt'),
@@ -1739,8 +1740,7 @@ class Esptpd extends MY_Controller
         if ($spt_nilai != '') {
             $spt_nilai = str_replace('.', '', $spt_nilai);
             // $spt_nilai = substr($spt_nilai, 0, -3);
-        } else if ($spt_nilai == '0'){
-
+        } else if ($spt_nilai == '0') {
         }
 
         $spt_pajak = $this->input->post('spt_pajak');
@@ -1763,70 +1763,10 @@ class Esptpd extends MY_Controller
                 "error" => True,
                 "msg" => "Nomor SPT Sudah Ada!!. Silahkan refresh SPTPD lalu klik simpan"
             ));
-        } else if ($cek_masa_pajak > 0){
-            if ($this->input->post('spt_jenis') == '2' && $this->input->post('nama_rekening') == '10'){
-                
+        } else if ($cek_masa_pajak > 0) {
+            if ($this->input->post('spt_jenis') == '2' && $this->input->post('nama_rekening') == '10') {
+
                 $save  = array(
-                        'spt_periode' => $this->input->post('spt_periode'),
-                        'spt_kode' => $this->input->post('kd_spt'),
-                        'spt_no_register'  => $this->input->post('no_sptpd'),
-                        'spt_nomor'  => $spt_nomor,
-                        'spt_kode_rek' => $this->input->post('kd_rekening'),
-                        'spt_periode_jual1' => $this->input->post('spt_periode_jual1'),
-                        'spt_periode_jual2' => $this->input->post('spt_periode_jual2'),
-                        'spt_status' => $this->input->post('spt_status'),
-                        'spt_pajak' => $spt_pajak,
-                        'spt_operator' => '0',
-                        'spt_jenis_pajakretribusi' => $this->input->post('spt_jenis'),
-                        'spt_idwpwr' => $this->input->post('wp_id'),
-                        'spt_jenis_pemungutan' => '1',
-                        'spt_tgl_proses' => date('Y-m-d'),
-                        'spt_tgl_entry' => date('Y-m-d'),
-                        'spt_idwp_reklame' => null,
-                        'spt_kode_billing' => $kode_billing,
-                        'status_bayar' => $sts_bayar
-                    );
-    
-                $insert_spt =  $this->Mod_esptpd->inserSPT("spt", $save);
-    
-                if ($insert_spt > 0) {
-                    $spt_id = $this->Mod_esptpd->_getSPT_id();
-    
-                    if ($this->input->post('spt_jenis') == '2') {
-                        $save  = array(
-                            'spt_dt_id_spt' => $spt_id,
-                            'spt_dt_korek' => $this->input->post('nama_rekening'),
-                            'spt_dt_jumlah'  => $spt_nilai,
-                            'spt_dt_tarif_dasar'  => 0,
-                            'spt_dt_persen_tarif' => $this->input->post('korek_persen_tarif'),
-                            'spt_dt_pajak' => $spt_pajak
-                        );
-                    }else{
-                        $save  = array(
-                            'spt_dt_id_spt' => $spt_id,
-                            'spt_dt_korek' => $this->input->post('kode_rekening_id'),
-                            'spt_dt_jumlah'  => $spt_nilai,
-                            'spt_dt_tarif_dasar'  => 0,
-                            'spt_dt_persen_tarif' => $this->input->post('korek_persen_tarif'),
-                            'spt_dt_pajak' => $spt_pajak
-                        );
-                    }
-                    $this->Mod_esptpd->inserSPT("spt_detail", $save);
-    
-                    echo json_encode(array("status" => TRUE));
-                } else
-                    echo json_encode(array(
-                        "error" => True,
-                        "msg" => "Pelaporan gagal disimpan!!"
-                    ));
-            }else{
-                echo json_encode(array(
-                    "error" => True,
-                    "msg" => "Masa pajak tersebut sudah dilaporkan"
-                ));
-            }
-        } else {
-            $save  = array(
                     'spt_periode' => $this->input->post('spt_periode'),
                     'spt_kode' => $this->input->post('kd_spt'),
                     'spt_no_register'  => $this->input->post('no_sptpd'),
@@ -1847,6 +1787,66 @@ class Esptpd extends MY_Controller
                     'status_bayar' => $sts_bayar
                 );
 
+                $insert_spt =  $this->Mod_esptpd->inserSPT("spt", $save);
+
+                if ($insert_spt > 0) {
+                    $spt_id = $this->Mod_esptpd->_getSPT_id();
+
+                    if ($this->input->post('spt_jenis') == '2') {
+                        $save  = array(
+                            'spt_dt_id_spt' => $spt_id,
+                            'spt_dt_korek' => $this->input->post('nama_rekening'),
+                            'spt_dt_jumlah'  => $spt_nilai,
+                            'spt_dt_tarif_dasar'  => 0,
+                            'spt_dt_persen_tarif' => $this->input->post('korek_persen_tarif'),
+                            'spt_dt_pajak' => $spt_pajak
+                        );
+                    } else {
+                        $save  = array(
+                            'spt_dt_id_spt' => $spt_id,
+                            'spt_dt_korek' => $this->input->post('kode_rekening_id'),
+                            'spt_dt_jumlah'  => $spt_nilai,
+                            'spt_dt_tarif_dasar'  => 0,
+                            'spt_dt_persen_tarif' => $this->input->post('korek_persen_tarif'),
+                            'spt_dt_pajak' => $spt_pajak
+                        );
+                    }
+                    $this->Mod_esptpd->inserSPT("spt_detail", $save);
+
+                    echo json_encode(array("status" => TRUE));
+                } else
+                    echo json_encode(array(
+                        "error" => True,
+                        "msg" => "Pelaporan gagal disimpan!!"
+                    ));
+            } else {
+                echo json_encode(array(
+                    "error" => True,
+                    "msg" => "Masa pajak tersebut sudah dilaporkan"
+                ));
+            }
+        } else {
+            $save  = array(
+                'spt_periode' => $this->input->post('spt_periode'),
+                'spt_kode' => $this->input->post('kd_spt'),
+                'spt_no_register'  => $this->input->post('no_sptpd'),
+                'spt_nomor'  => $spt_nomor,
+                'spt_kode_rek' => $this->input->post('kd_rekening'),
+                'spt_periode_jual1' => $this->input->post('spt_periode_jual1'),
+                'spt_periode_jual2' => $this->input->post('spt_periode_jual2'),
+                'spt_status' => $this->input->post('spt_status'),
+                'spt_pajak' => $spt_pajak,
+                'spt_operator' => '0',
+                'spt_jenis_pajakretribusi' => $this->input->post('spt_jenis'),
+                'spt_idwpwr' => $this->input->post('wp_id'),
+                'spt_jenis_pemungutan' => '1',
+                'spt_tgl_proses' => date('Y-m-d'),
+                'spt_tgl_entry' => date('Y-m-d'),
+                'spt_idwp_reklame' => null,
+                'spt_kode_billing' => $kode_billing,
+                'status_bayar' => $sts_bayar
+            );
+
             $insert_spt =  $this->Mod_esptpd->inserSPT("spt", $save);
 
             if ($insert_spt > 0) {
@@ -1861,7 +1861,7 @@ class Esptpd extends MY_Controller
                         'spt_dt_persen_tarif' => $this->input->post('korek_persen_tarif'),
                         'spt_dt_pajak' => $spt_pajak
                     );
-                }else{
+                } else {
                     $save  = array(
                         'spt_dt_id_spt' => $spt_id,
                         'spt_dt_korek' => $this->input->post('kode_rekening_id'),
@@ -1882,7 +1882,8 @@ class Esptpd extends MY_Controller
         }
     }
 
-    public function insert_lapor(){
+    public function insert_lapor()
+    {
         $spt_id = $this->input->post('spt_id');
         $jenis_pajak = $this->input->post('jenis_pajak');
         $kode_billing = $this->input->post('kode_billing');
@@ -1908,10 +1909,10 @@ class Esptpd extends MY_Controller
 
         $this->upload->initialize($config);
 
-        if ($this->upload->do_upload('imagefile')){//jika upload lampiran
+        if ($this->upload->do_upload('imagefile')) { //jika upload lampiran
             $gambar = $this->upload->data();
 
-            $save = array (
+            $save = array(
                 'image' => $gambar['file_name'],
                 'tgl_lapor' => date('Y-m-d')
             );
@@ -1940,14 +1941,15 @@ class Esptpd extends MY_Controller
             // $this->Mod_esptpd->inserSPT("spt_detail", $save);
 
             echo json_encode(array("status" => TRUE));
-        }else{
+        } else {
             echo json_encode(array("error" => TRUE));
         }
     }
 
-    public function update_lapor(){
+    public function update_lapor()
+    {
         $kode_billing = $this->input->post('kode_billing');
-        $file_lama = './assets/foto/lampiran/'.$kode_billing.'.pdf'; // Path file PDF yang ingin dihapus
+        $file_lama = './assets/foto/lampiran/' . $kode_billing . '.pdf'; // Path file PDF yang ingin dihapus
 
         if (file_exists($file_lama)) {
             if (unlink($file_lama)) {
@@ -1961,13 +1963,13 @@ class Esptpd extends MY_Controller
 
                 $this->upload->initialize($config);
 
-                if ($this->upload->do_upload('file')){//jika upload lampiran
+                if ($this->upload->do_upload('file')) { //jika upload lampiran
                     // $file_lama = './assets/foto/lampiran/'.$kode_billing.'.pdf'; // Path file PDF yang ingin dihapus
                     // unlink($file_lama); //hapus file lama
                     $gambar = $this->upload->data();
 
                     echo json_encode(array("status" => TRUE));
-                }else{
+                } else {
                     echo json_encode(array("error" => TRUE));
                 }
             } else {
@@ -1984,19 +1986,20 @@ class Esptpd extends MY_Controller
 
             $this->upload->initialize($config);
 
-            if ($this->upload->do_upload('file')){//jika upload lampiran
+            if ($this->upload->do_upload('file')) { //jika upload lampiran
                 // $file_lama = './assets/foto/lampiran/'.$kode_billing.'.pdf'; // Path file PDF yang ingin dihapus
                 // unlink($file_lama); //hapus file lama
                 $gambar = $this->upload->data();
 
                 echo json_encode(array("status" => TRUE));
-            }else{
+            } else {
                 echo json_encode(array("error" => TRUE));
             }
         }
     }
 
-    public function insert_lapor_hp(){
+    public function insert_lapor_hp()
+    {
         $spt_id = $this->input->post('spt_id');
         $jenis_pajak = $this->input->post('jenis_pajak');
         $kode_billing = $this->input->post('kode_billing');
@@ -2022,17 +2025,17 @@ class Esptpd extends MY_Controller
 
         $this->upload->initialize($config);
 
-        if ($this->upload->do_upload('imagefile')){
+        if ($this->upload->do_upload('imagefile')) {
             $gambar = $this->upload->data();
 
-            $save = array (
+            $save = array(
                 'image' => $gambar['file_name'],
                 'tgl_lapor' => date('Y-m-d')
             );
 
             $update_spt = $this->Mod_esptpd->updateSPT($spt_id, $save);
-        }else{
-            $save = array (
+        } else {
+            $save = array(
                 'tgl_lapor' => date('Y-m-d')
             );
 
@@ -2233,27 +2236,27 @@ class Esptpd extends MY_Controller
                 "error" => True,
                 "msg" => "Masa pajak tersebut sudah dilaporkan"
             ));
-        }else {
+        } else {
             $save  = array(
-                    'spt_periode' => $this->input->post('spt_periode'),
-                    'spt_kode' => $this->input->post('kd_spt'),
-                    'spt_no_register'  => $this->input->post('no_sptpd'),
-                    'spt_nomor'  => $spt_nomor,
-                    'spt_kode_rek' => $this->input->post('kd_rekening'),
-                    'spt_periode_jual1' => $this->input->post('spt_periode_jual1'),
-                    'spt_periode_jual2' => $this->input->post('spt_periode_jual2'),
-                    'spt_status' => $this->input->post('spt_status'),
-                    'spt_pajak' => $spt_pajak,
-                    'spt_operator' => '0',
-                    'spt_jenis_pajakretribusi' => $this->input->post('spt_jenis'),
-                    'spt_idwpwr' => $this->input->post('wp_id'),
-                    'spt_jenis_pemungutan' => '1',
-                    'spt_tgl_proses' => date('Y-m-d'),
-                    'spt_tgl_entry' => date('Y-m-d'),
-                    'spt_idwp_reklame' => null,
-                    'spt_kode_billing' => $kode_billing,
-                    'status_bayar' => $sts_bayar
-                );
+                'spt_periode' => $this->input->post('spt_periode'),
+                'spt_kode' => $this->input->post('kd_spt'),
+                'spt_no_register'  => $this->input->post('no_sptpd'),
+                'spt_nomor'  => $spt_nomor,
+                'spt_kode_rek' => $this->input->post('kd_rekening'),
+                'spt_periode_jual1' => $this->input->post('spt_periode_jual1'),
+                'spt_periode_jual2' => $this->input->post('spt_periode_jual2'),
+                'spt_status' => $this->input->post('spt_status'),
+                'spt_pajak' => $spt_pajak,
+                'spt_operator' => '0',
+                'spt_jenis_pajakretribusi' => $this->input->post('spt_jenis'),
+                'spt_idwpwr' => $this->input->post('wp_id'),
+                'spt_jenis_pemungutan' => '1',
+                'spt_tgl_proses' => date('Y-m-d'),
+                'spt_tgl_entry' => date('Y-m-d'),
+                'spt_idwp_reklame' => null,
+                'spt_kode_billing' => $kode_billing,
+                'status_bayar' => $sts_bayar
+            );
             $insert_spt = $this->Mod_esptpd->inserSPT("spt", $save);
 
             // var_dump($save);
@@ -2331,7 +2334,6 @@ class Esptpd extends MY_Controller
                 'spt_pajak' => $spt_pajak,
                 'image' => $gambar['file_name']
             );
-
         } else { //Apabila tidak ada gambar yang di upload
 
             $save  = array(
@@ -2340,7 +2342,6 @@ class Esptpd extends MY_Controller
                 'spt_periode_jual2' => $this->input->post('spt_periode_jual2'),
                 'spt_pajak' => $spt_pajak
             );
-
         }
 
         $update_spt = $this->Mod_esptpd->updateSPT($spt_id, $save);
@@ -2356,7 +2357,7 @@ class Esptpd extends MY_Controller
             // $this->Mod_esptpd->updateSPTDetil($spt_dt_id, $save);
             // echo json_encode(array("status" => TRUE));
             foreach ($this->input->post('spt_dt_korek') as $key => $value) {
-                
+
 
                 if (!empty($value)) {
                     $arr_korek = explode(",", $this->input->post('spt_dt_korek')[$key]);
@@ -2555,14 +2556,14 @@ class Esptpd extends MY_Controller
     public function register_hapus()
     {
         $kode_billing = $this->input->post('kode_billing');
-        $cek_verifikasi = $this->Mod_esptpd->cek_verifikasi($kode_billing);//cek kode billing udah pernah diverifikasi
-        if ($cek_verifikasi == null){
+        $cek_verifikasi = $this->Mod_esptpd->cek_verifikasi($kode_billing); //cek kode billing udah pernah diverifikasi
+        if ($cek_verifikasi == null) {
             $response = [
                 'status' => 'false',
                 'message' => 'Data belum pernah diverifikasi sebelumnya'
             ];
-        }else {
-            $hapus_verifikasi = $this->Mod_esptpd->hapus_verifikasi($kode_billing);//hapus kode billing udah pernah diverifikasi
+        } else {
+            $hapus_verifikasi = $this->Mod_esptpd->hapus_verifikasi($kode_billing); //hapus kode billing udah pernah diverifikasi
             $response = [
                 'status' => 'true',
                 'message' => 'Verifikasi berhasil dibatalkan'
@@ -2572,19 +2573,20 @@ class Esptpd extends MY_Controller
         echo json_encode($response);
     }
 
-    function generate_va() {
+    function generate_va()
+    {
         $kode_billing = $_POST['idbilling'];
         $data = [
             'idbilling' => $kode_billing
         ];
         $get_va = $this->getVA($data);
-        if ($get_va->status == 'Create VA Sukses'){
+        if ($get_va->status == 'Create VA Sukses') {
             $response = [
                 'status' => 'Create VA Sukses',
                 'kode_billing' => $kode_billing,
                 'va_number' => $get_va->va_number
             ];
-        }else{
+        } else {
             $response = [
                 'status' => 'Create VA Gagal',
                 'kode_billing' => $kode_billing,
@@ -2594,29 +2596,30 @@ class Esptpd extends MY_Controller
         echo json_encode($response);
     }
 
-    function getVA($data) {
+    function getVA($data)
+    {
         $url = 'http://192.168.1.20/api_va/request_billing';
-		$curl = curl_init($url);
-		curl_setopt($curl, CURLOPT_URL, $url);
-		curl_setopt($curl, CURLOPT_POST, true);
-		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-	
-		$headers = array(
-		"Content-Type: multipart/form-data",
-		"Access-Control-Allow-Methods: POST",
-		);
-	
-		curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-		
-		curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-	
-		//for debug only!
-		curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
-		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-	
-		$resp = curl_exec($curl);
-		curl_close($curl);
-		// var_dump($resp);
-		return json_decode($resp);
+        $curl = curl_init($url);
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_POST, true);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+        $headers = array(
+            "Content-Type: multipart/form-data",
+            "Access-Control-Allow-Methods: POST",
+        );
+
+        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+
+        //for debug only!
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+
+        $resp = curl_exec($curl);
+        curl_close($curl);
+        // var_dump($resp);
+        return json_decode($resp);
     }
 }
