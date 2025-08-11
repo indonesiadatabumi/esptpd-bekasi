@@ -32,6 +32,10 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 
 #folder lampiran
 /assets/foto/lampiran
+#folder pendaftaran
+/assets/foto/pendaftaran
+#folder user
+/assets/foto/user
 
 #env database
 /application/config/database.php
